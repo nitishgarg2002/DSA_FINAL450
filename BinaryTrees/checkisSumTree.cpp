@@ -81,46 +81,43 @@ Node* buildTree(string str)
     
     return root;
 }
-void inorder(Node * node)
-{
-    if(node==NULL)
-        return;
-    
-    inorder(node->left);
-    cout<<node->data<<" ";
-    inorder(node->right);
-}
 
 
  // } Driver Code Ends
-//User function template for C++
-
-/* A binary tree node
+/*  Tree node
 struct Node
 {
     int data;
     Node* left, * right;
 }; */
 
-class Solution {
-  public:
-  
-    // Convert a given tree to a tree where every node contains sum of values of
-    // nodes in left and right subtrees in the original tree
-    void toSumTree(Node *root)
+// Should return true if tree is Sum Tree, else false
+class Solution
+{
+    public:
+    int sumTree(Node *root) {
+        if(root==NULL) {
+            return 0;
+            
+        }
+        else if(root->left==NULL &&root->right==NULL) {
+            return root->data;
+        }
+        else if(root->data==sumTree(root->left)+sumTree(root->right)) {
+            return 2*root->data;
+        }
+    }
+    bool isSumTree(Node* root)
     {
-        // Your code here
-        if(root==NULL) return;
+         // Your code here
+if(root->data==sumTree(root)/2) {
+    return 1;
+}
+else return 0;
+         
         
-        root->data = 
-        (root->left ==NULL ? 0: root->left->data)
-        + (root->right==NULL ? 0: root->right->data);
-        toSumTree(root->left);
-        
-        toSumTree(root->right);
-                root->data += 
-        (root->left ==NULL ? 0: root->left->data)
-        + (root->right==NULL ? 0: root->right->data);
+         
+         
     }
 };
 
@@ -137,9 +134,7 @@ int main()
 		getline(cin,s);
         Node* root = buildTree(s);
         Solution ob;
-        ob.toSumTree(root);
-        inorder(root);
-        cout<<endl;
+        cout <<ob.isSumTree(root) << endl;
     }
     return 1;
 }  // } Driver Code Ends
